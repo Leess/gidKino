@@ -5,6 +5,31 @@
 	<title>Document</title>
 </head>
 <body>
-	olololo
+	<div class="stock__form send_form">
+                                <div class="wrap_form">                                
+                                    <div class="text_form">
+                                        <p>Хотите сократить <br />
+                                            расходы на интернет?</p>
+                                        <h2>Оставьте заявку<br />
+                                            <span>на консультацию менеджера</span></h2>
+                                    </div>
+                                    <form class="form" action="inc/send_mail.php" method="post">
+                                        <div class="control">
+                                            <input type="text" name="name" required placeholder="Введите имя" />
+                                        </div>
+                                        <div class="control">
+                                            <input type="tel" name="phone" required placeholder="Введите телефон" />
+                                        </div>
+                                        <div class="control">
+                                            <input type="email" name="email" required placeholder="Введите e-mail" />
+                                        </div>
+                                        <input type="hidden" name="type" value="1">
+                                        <div class="send_app">
+                                            <input type="submit" value="Получить консультацию" />
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
 </body>
 </html>

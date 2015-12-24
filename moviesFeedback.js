@@ -62,7 +62,7 @@ $(document).ready(function () {
             $('#movie-year').val('2006');
             $('#movie-description').val('Пути актёра, сценариста ТВ-шоу, участвующего в реалити-проекте, и известного разработчика видеоигр сплелись самым загадочным и мистическим образом…');
             $('#movie-img').val('http://www.kinopoisk.ru/images/film_big/259197.jpg');
-            $('#movie-post-author').val('Виталий');
+            $('#movie-post-author').val('Олег');
 
 
         },

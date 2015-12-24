@@ -22,7 +22,8 @@ $(document).ready(function () {
         },
 
         handleFeedBackSubmit: function (event) {
-            event.preventDefault(); //СЌС‚Рѕ С‡С‚РѕР±С‹ С„РѕСЂРјР° РЅРµ СЃР°Р±РјРёС‚РЅСѓР»Р°СЃСЊ РѕР±С‹С‡РЅС‹Рј РјРµС‚РѕРґРѕРј, РІРµРґСЊ РјС‹ СЃРѕР±РёСЂР°РµРјСЃСЏ РѕС‚РїСЂР°РІР»СЏС‚СЊ РґР°РЅРЅС‹Рµ С‡РµСЂРµР· AJAX            
+            event.preventDefault(); //это чтобы форма не сабмитнулась обычным методом, ведь мы собираемся отправлять данные через AJAX
+
             var formData = {
                 title: $('#movie-title').val(),
                 genre: $('#movie-genre').val(),
@@ -31,7 +32,8 @@ $(document).ready(function () {
                 imgUrl: $('#movie-img').val(),
                 postAuthor: $('#movie-post-author').val()
             };
-           // console.debug('Feedback form submitting:', formData);
+
+            console.debug('Feedback form submitting:', formData);
 
             $.ajax({
                 method: 'POST',
@@ -40,19 +42,14 @@ $(document).ready(function () {
                     'X-Parse-Application-Id': moviesFeedback.apiAppId,
                     'X-Parse-JavaScript-Key': moviesFeedback.apiJSId
                 },
-
-
-
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function (data, textStatus) {
                     console.debug('Successfull feedback post request. Response is:', data);
-                    alert("РЎРїР°СЃРёР±Рѕ, РІР°С€ РѕС‚Р·С‹РІ РїСЂРёРЅСЏС‚");
 
                 },
                 error: function (response, status) {
                     console.error('Error while feedback post. Response is:', response);
-                    alert("РћС€РёР±РєР° РѕС‚РїСЂР°РІРєРё РґР°РЅРЅС‹С…")Р¶ 
                 }
             })
 
@@ -60,12 +57,12 @@ $(document).ready(function () {
 
         populateFormWithTestData: function () {
 
-            $('#movie-title').val('');
-            $('#movie-genre').val('');
-            $('#movie-year').val('');
-            $('#movie-description').val('');
+            $('#movie-title').val('Девятки');
+            $('#movie-genre').val('Фантастика');
+            $('#movie-year').val('2006');
+            $('#movie-description').val('Пути актёра, сценариста ТВ-шоу, участвующего в реалити-проекте, и известного разработчика видеоигр сплелись самым загадочным и мистическим образом…');
             $('#movie-img').val('http://www.kinopoisk.ru/images/film_big/259197.jpg');
-            $('#movie-post-author').val('РћР»РµРі');
+            $('#movie-post-author').val('Олег');
 
 
         },
@@ -108,13 +105,13 @@ $(document).ready(function () {
                     var divider = $('<hr>');
 
                     var recTitle = $("<h4>" + recommendations[i].title + " <small>(" + recommendations[i].genre + ")</small></h4>");
-                    var recYear = $("<span>Р“РѕРґ: " + recommendations[i].year + "</span><br>");
-                    var recDescription = $("<p>РћРїРёСЃР°РЅРёРµ: " + recommendations[i].description + "</p>");
+                    var recYear = $("<span>Год: " + recommendations[i].year + "</span><br>");
+                    var recDescription = $("<p>Описание: " + recommendations[i].description + "</p>");
 
                     var recImg = $("<img src='" + recommendations[i].imgUrl + "'>");
 
-                    var recPostAuthorName = $("<p>Р РµРєРѕРјРјРµРЅРґР°С†РёСЏ РѕС‚: " + recommendations[i].postAuthor + "</p>");
-                    var recPostDate = $("<p>Р”Р°С‚Р° СЂРµРєРѕРјРµРЅРґР°С†РёРё: " + recommendations[i].createdAt + "</p>");
+                    var recPostAuthorName = $("<p>Рекоммендация от: " + recommendations[i].postAuthor + "</p>");
+                    var recPostDate = $("<p>Дата рекомендации: " + recommendations[i].createdAt + "</p>");
 
                     thumbnailCaption.append(recTitle);
                     thumbnailCaption.append(recYear);
@@ -134,10 +131,9 @@ $(document).ready(function () {
 
             })
 
-        } 
+        }
 
-   };
-
+    };
 
     moviesFeedback.init();
 

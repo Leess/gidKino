@@ -8,24 +8,33 @@
 	<div class="stock__form send_form">
                                 <div class="wrap_form">                                
                                     <div class="text_form">
-                                        <p>Хотите сократить <br />
-                                            расходы на интернет?</p>
-                                        <h2>Оставьте заявку<br />
-                                            <span>на консультацию менеджера</span></h2>
+                                        <p> 
+                                            </p>
+                                        <h2><br />
+                                            <span></span></h2>
                                     </div>
                                     <form class="form" action="inc/send_mail.php" method="post">
                                         <div class="control">
-                                            <input type="text" name="name" required placeholder="Введите имя" />
+                                            <input type="text" name="name" required placeholder="Название" />
                                         </div>
                                         <div class="control">
-                                            <input type="tel" name="phone" required placeholder="Введите телефон" />
+                                            <input type="tel" name="genre" required placeholder="жанр" />
                                         </div>
                                         <div class="control">
-                                            <input type="email" name="email" required placeholder="Введите e-mail" />
+                                            <input type="year" name="year" required placeholder="year" />
+                                        </div>                                       
+                                       
+                                        <div class="control">
+                                            <textarea name="description" id="" cols="30" rows="10"></textarea>
                                         </div>
-                                        <input type="hidden" name="type" value="1">
-                                        <div class="send_app">
-                                            <input type="submit" value="Получить консультацию" />
+                                        <div class="control">
+                                            <input type="link" name="url" required placeholder="Ссылка на картину" />
+                                        </div>
+                                        <div class="control">
+                                            <input type="name" name="name" required placeholder="Ваше имя" />
+                                        </div>
+                                         <div class="send_app">
+                                            <input type="submit" value="Оставить рекомендацию" />
                                         </div>
 
                                     </form>

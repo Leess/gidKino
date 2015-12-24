@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var moviesFeedback = {
 
-        submitForm: $('#movie-feedback-form'),
+        submitForm: $('#movie-feedback-form'),      
         apiHost: 'https://api.parse.com/1/',
         apiAppId: '8V1SzXwjmJC1BHXqlYXVuD1pPn0Di4FdxGEUY1N7',
         apiJSId: 'Xq9y1XH9TEWai2mC7XwRQdlVdWPILnTXnINwbEBa',
@@ -22,14 +22,16 @@ $(document).ready(function () {
         },
 
         handleFeedBackSubmit: function (event) {
-            event.preventDefault(); //это чтобы форма не сабмитнулась обычным методом, ведь мы собираемся отправлять данные через AJAX            
+            
+            event.preventDefault(); //это чтобы форма не сабмитнулась обычным методом, ведь мы собираемся отправлять данные через AJAX   
             var formData = {
                 title: $('#movie-title').val(),
                 genre: $('#movie-genre').val(),
                 year: $('#movie-year').val(),
                 description: $('#movie-description').val(),
                 imgUrl: $('#movie-img').val(),
-                postAuthor: $('#movie-post-author').val()
+                postAuthor: $('#movie-post-author').val(),
+                loadData:$("#load-data")
             };
            // console.debug('Feedback form submitting:', formData);
 
@@ -52,11 +54,12 @@ $(document).ready(function () {
                 },
                 error: function (response, status) {
                     console.error('Error while feedback post. Response is:', response);
-                    alert("Ошибка отправки данных")ж 
+                    alert("Ошибка отправки данных")
                 }
             })
 
         },
+
 
         populateFormWithTestData: function () {
 

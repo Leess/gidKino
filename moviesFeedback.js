@@ -7,17 +7,59 @@ $(document).ready(function () {
         apiAppId: '8V1SzXwjmJC1BHXqlYXVuD1pPn0Di4FdxGEUY1N7',
         apiJSId: 'Xq9y1XH9TEWai2mC7XwRQdlVdWPILnTXnINwbEBa',
 
+
         init: function () {
             console.debug('Movies feedback page initialization started...');
             moviesFeedback.populateFormWithTestData();
             moviesFeedback.bindEventHandlers();
-
             moviesFeedback.displayRecommendationsOnPage();
+            moviesFeedback.validationForm();
+
         },
 
         bindEventHandlers: function () {
 
             moviesFeedback.submitForm.submit(moviesFeedback.handleFeedBackSubmit);
+
+        },
+
+         validationForm: function() { 
+            console.debug ('parforming validation');                     
+            var titleInput =  $('#movie-title');
+            var genreInput = $('#movie-genre');
+
+            var title = titleInput.val();
+            var genre = genreInput.val();
+            var titleValidation, genreValidation;
+
+
+            if (title.length > 2) {
+               titleValidation = true;
+               titleInput.parent().addClass('has-success').removeClass('has-error');
+
+               
+
+            } else {
+                titleValidation =  false;
+                titleInput.parent().addClass('has-error').removeClass('has-success');
+                               
+
+            }
+             if (genre.length > 2) {
+                 genreInput.parent().addClass('has-success').removeClass('has-error');
+                genreValidation = true
+
+            } else {
+                genreInput.parent().addClass('has-error').removeClass('has-success');
+                genreValidation =  false
+                
+
+            }
+            if (titleValidation == true && genreValidation == true) {
+                return true;
+            } else {
+                return false;
+            }
 
         },
 
@@ -33,6 +75,8 @@ $(document).ready(function () {
                 postAuthor: $('#movie-post-author').val(),
                 loadData:$("#load-data")
             };
+
+           
            // console.debug('Feedback form submitting:', formData);
 
             $.ajax({
@@ -67,7 +111,7 @@ $(document).ready(function () {
             $('#movie-genre').val('');
             $('#movie-year').val('');
             $('#movie-description').val('');
-            $('#movie-img').val('http://www.kinopoisk.ru/images/film_big/259197.jpg');
+            $('#movie-img').val('');
             $('#movie-post-author').val('Олег');
 
 

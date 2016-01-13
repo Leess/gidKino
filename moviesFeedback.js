@@ -102,7 +102,7 @@ $(document).ready(function () {
         validateForm: function () {
             console.debug('Performing validation');
 
-            var titleValidation, genreValidation;
+            var titleValidation, genreValidation, yearValidation;
 
             var titleInput = $('#movie-title');
             var genreInput = $('#movie-genre');

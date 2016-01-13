@@ -2,6 +2,173 @@ $(document).ready(function () {
 
     var moviesFeedback = {
 
+        submitForm: $('#movie-feedback-form'),
+        apiHost: 'https://api.parse.com/1/',
+        apiAppId: '8V1SzXwjmJC1BHXqlYXVuD1pPn0Di4FdxGEUY1N7',
+        apiJSId: 'Xq9y1XH9TEWai2mC7XwRQdlVdWPILnTXnINwbEBa',
+
+        init: function () {
+            console.debug('Movies feedback page initialization started...');
+
+            moviesFeedback.bindEventHandlers();
+
+        },
+
+        bindEventHandlers: function () {
+
+            $('#movie-feedback-form').submit(function (event) {
+                event.preventDefault();
+                console.info('Going to submit feedback form');
+
+                if (moviesFeedback.validateForm() == true) {
+
+                    var formData = {
+                        title: $('#movie-title').val(),
+                        genre: $('#movie-genre').val(),
+                        year: $('#movie-year').val(),
+                        description: $('#movie-description').val(),
+                        imgUrl: $('#movie-img').val(),
+                        postAuthor: $('#movie-post-author').val()
+                    };
+
+                    console.debug('Going to post following data:', formData);
+
+                    $.ajax({
+                        url: 'https://api.parse.com/1/classes/Movie',
+                        method: 'POST',
+
+                        headers: {
+                            'X-Parse-Application-Id': moviesFeedback.apiAppId,
+                            'X-Parse-JavaScript-Key': moviesFeedback.apiJSId
+                        },
+
+                        contentType: 'application/json',
+
+                        data: JSON.stringify(formData),
+
+                        success: function (data, textStatus) {
+                            console.debug('Successful feedback post request. Response is:', data);
+                            alert('Спасибо, ваш отзыв успешно сохранён');
+
+                        },
+                        error: function (error, status) {
+                            console.error('Error while feedback post. Error is:', error);
+                            alert('Произошла ошибка. Проверьте консоль');
+                        }
+                    });
+
+                } else {
+                    swal('Форма не валидна!');
+                }
+
+            });
+
+            $('#btn-load-data').click(function () {
+                console.info('Going to get some data from API server');
+
+                $.ajax({
+                    url: 'https://api.parse.com/1/classes/Movie',
+                    method: 'GET',
+
+                    headers: {
+                        'X-Parse-Application-Id': moviesFeedback.apiAppId,
+                        'X-Parse-JavaScript-Key': moviesFeedback.apiJSId
+                    },
+
+                    success: function (data, textStatus) {
+                        console.debug('Successful feedback post request. Response is:', data);
+
+                        var recommendation = data.results;
+
+                        for (var i = 0; i < recommendation.length; i++) {
+                            var movieTitle = $('<h3></h3>');
+                            movieTitle.html(recommendation[i].title);
+                            $('#movie-recommendations-feed').append(movieTitle);
+                        }
+
+
+                    },
+                    error: function (error, status) {
+                        console.error('Error while feedback post. Error is:', error);
+
+                    }
+                })
+
+            })
+
+
+        },
+
+        validateForm: function () {
+            console.debug('Performing validation');
+
+            var titleValidation, genreValidation;
+
+            var titleInput = $('#movie-title');
+            var genreInput = $('#movie-genre');
+
+            var title = titleInput.val();
+            var genre = genreInput.val();
+
+            if (title.length > 2) {
+
+                titleInput.parent().addClass('has-success').removeClass('has-error');
+
+                titleValidation = true;
+
+            } else {
+
+                titleInput.parent().addClass('has-error').removeClass('has-success');
+
+                titleValidation = false;
+
+            }
+
+            if (genre.length > 2) {
+
+                genreInput.parent().addClass('has-success').removeClass('has-error');
+
+                genreValidation = true;
+
+            } else {
+
+                genreInput.parent().addClass('has-success').removeClass('has-error');
+
+                genreValidation = false;
+
+            }
+
+            if (titleValidation == true && genreValidation == true) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
+
+        }
+
+    };
+
+    moviesFeedback.init();
+
+});
+
+
+
+
+
+
+
+
+
+
+/*$(document).ready(function () {
+
+    var moviesFeedback = {
+
         submitForm: $('#movie-feedback-form'),      
         apiHost: 'https://api.parse.com/1/',
         apiAppId: '8V1SzXwjmJC1BHXqlYXVuD1pPn0Di4FdxGEUY1N7',
@@ -189,3 +356,4 @@ $(document).ready(function () {
     moviesFeedback.init();
 
 });
+*/

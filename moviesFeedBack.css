@@ -10,3 +10,7 @@
 div.has-custom-error {
     background-color: red;
 }
+
+.rec-wrap {
+display: none;
+}

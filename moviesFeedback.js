@@ -604,13 +604,11 @@ $(document).ready(function () {
         getExistentRecomendationIds: function () {
                 var existentRecArray = [];
 
-                $('.rec-wrapper').each(function (index, element) {
-                    // element == this
-                    $(element).css("backgroundColor", "yellow");
-                    if ($(this).is("#stop")) {
-                        $("span").text("Stopped at div index #" + index);
-                        return false;
-                    }
+                $('.rec-wrapper').each(function () {
+
+                    $('div[id]').existentRecArray.push([i]);
+                    for (var i = 0; i <= length.existentRecArray; i++);
+
                 });
 
 

@@ -604,10 +604,10 @@ $(document).ready(function () {
         getExistentRecomendationIds: function () {
                 var existentRecArray = [];
 
+                    alert("existentRecArray");
                 $('.rec-wrapper').each(function () {
 
-                    $('div[id]').existentRecArray.push([i]);
-                    for (var i = 0; i <= length.existentRecArray; i++);
+                    $(this).existentRecArray.push([i]);
 
                 });
 
@@ -619,7 +619,33 @@ $(document).ready(function () {
 
 
 
-            }
+            },
+        
+        
+        createRecElement: function (recObject) {
+            
+            
+            var recTemplate = _.template(
+                '<div class="col-xs-12 rec-wrapper" id="<%= rec.objectId %>">' +
+                '<div class="thumbnail">' +
+                '<img src="<%= rec.imgUrl %>">' +
+                '<div class="caption">' +
+                '<h3><%= rec.title %></h3>' +
+                '<p>Жанр: <%= rec.genre %></p>' +
+                '<p>Год: <%= rec.year %></p>' +
+                '<p>Описание: <%= rec.description %> </p>' +
+                '<p>Автор рекоммендации: <%= rec.postAuthor %></p>' +
+                '<p>Дата рекоммендации: <%= rec.createdAt %></p>' +
+                '</div></div></div>');
+            
+             var recElement = recTemplate({
+                    rec: recommendations[i]
+                });
+
+        }
+        
+        
+        
             /*switchAutoupdate: function () {
 
             }*/
